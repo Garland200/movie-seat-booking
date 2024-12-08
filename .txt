@@ -1,0 +1,40 @@
+Variables:
+
+container: References the element with class .container where the seat selection happens.
+seats: An array of all the .seat elements within each .row that are not occupied (.occupied class).
+count: References the element with ID count where the number of selected seats is displayed.
+total: References the element with ID total where the total price is displayed.
+movieSelect: References the element with ID movie which is likely a dropdown for selecting the movie.
+ticketPrice: Stores the current selected movie price.
+
+
+Functions:
+
+setMovieData(movieIndex, moviePrice): Saves the selected movie index and price to local storage using localStorage.setItem.
+updateSelectedCount(): Updates the number of selected seats and total price.
+-Finds all selected seats using querySelectorAll.
+-Gets the indexes of selected seats.
+-Saves the selected seat indexes as a JSON string to local storage.
+-Updates count and total elements with the number of selected seats and total price based on current ticket price.
+
+populateUI(): Retrieves data from local storage and updates the UI.
+-Parses the JSON string containing selected seat indexes from local storage.
+-If selected seats exist, loops through all seats and adds the selected class if the seat index is present in the selected seats array.
+-Retrieves the selected movie index from local storage.
+-If a selected movie index exists, sets the selected index of the movie dropdown.
+
+
+Event Listeners:
+
+movieSelect.addEventListener('change', ...): Listens for changes on the movie dropdown.
+-Updates ticketPrice with the newly selected value.
+-Calls setMovieData to save the selected movie index and price.
+-Calls updateSelectedCount to update the count and total based on the new price.
+-container.addEventListener('click', ...): Listens for clicks inside the container.
+-Checks if the clicked element has the class seat and is not occupied.
+-Toggles the selected class on the clicked seat.
+-Calls updateSelectedCount to update the count and total based on seat selection changes.
+
+Initial Configuration:
+
+updateSelectedCount() is called initially to set the count and total based on any existing selections stored in local storage.
